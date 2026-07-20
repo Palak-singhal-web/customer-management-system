@@ -48,7 +48,6 @@ public class Main {
                     System.out.println("Please enter phone number");
                     custNoToAdd = sc.nextLine();
                 }
-
                 cs.addCustomer(idToAdd, custNameToAdd, custEmailToAdd,custNoToAdd);
             }
             if(menu == 2) {
@@ -68,6 +67,60 @@ public class Main {
                     System.out.println("Customer ID is invalid");
                 else
                     System.out.println("Customer ID " + idToDelete + " successfully deleted");
+            }
+            if(menu ==4){
+                System.out.println("Enter customer ID you want to update");
+                int idToUpdate = Integer.parseInt(sc.nextLine());
+                if(cs.findCustomerById(idToUpdate) == null){
+                    System.out.println("Customer ID " + idToUpdate + " does not exists.");
+                    continue;
+                }
+                boolean flag = true;
+                while(flag){
+                    System.out.println("What do you want to update?");
+                    System.out.println("1- Name\n2- Email\n3- Phone Number\n4- End");
+                    int updateMenu = Integer.parseInt(sc.nextLine());
+
+                    switch(updateMenu){
+                        case 1:
+                            System.out.println("Please enter new name");
+                            String custNameToUpdate = sc.nextLine();
+                            if(custNameToUpdate.isEmpty()){
+                                System.out.println("Name cannot be empty. Please enter valid name");
+                                custNameToUpdate= sc.nextLine();
+                            }
+                            if(custNameToUpdate.isEmpty()){
+                                System.out.println("Customer addition failed");
+                                return;
+                            }
+                            cs.updateCustomer(idToUpdate, updateMenu, custNameToUpdate);
+                            break;
+                        case 2:
+                            System.out.println("Please enter new email");
+                            String custEmailToUpdate = sc.nextLine();
+                            while(!custEmailToUpdate.matches("^[A-Za-z0-9_.-]+@[A-Za-z0-9]+\\.[A-Za-z]{2,3}$")){
+                                System.out.println("Please enter valid email");
+                                custEmailToUpdate = sc.nextLine();
+                            }
+                            cs.updateCustomer(idToUpdate,updateMenu,custEmailToUpdate);
+                            break;
+                        case 3:
+                            System.out.println("Please enter new phone number");
+                            String custNoToUpdate = sc.nextLine();
+                            while(custNoToUpdate.isEmpty()){
+                                System.out.println("Please enter phone number");
+                                custNoToUpdate = sc.nextLine();
+                            }
+                            cs.updateCustomer(idToUpdate,updateMenu,custNoToUpdate);
+                            break;
+                        case 4:
+                            System.out.println("Thank you!");
+                            flag = false;
+                            break;
+                        default:
+                            System.out.println("Invalid Input");
+                    }
+                }
             }
         }
     }

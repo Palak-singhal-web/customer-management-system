@@ -29,4 +29,19 @@ public class CustomerService {
         return null;
     }
 
+    public void updateCustomer( int id, int field, String value){
+        Customer customer = findCustomerById(id);
+        switch(field){
+            case 1:
+                customer.setName(value);
+                break;
+            case 2:
+                customer.setEmail(value);
+                break;
+            case 3:
+                customer.setPhoneNumber(value);
+                break;
+        }
+    }
+
 }
