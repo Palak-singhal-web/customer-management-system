@@ -13,20 +13,8 @@ public class CustomerService {
         return findCustomerById(id);
     }
 
-    public int deleteCustomer(int id){
-        Customer customerToDelete = findCustomerById(id);
-        if(customerToDelete != null) {
-            customers.remove(customerToDelete);
-            return 1;
-        }
-        return 0;
-    }
-
-    public Customer findCustomerById(int id){
-        for(Customer c : customers){
-            if(id == c.getCustomerId()) return c;
-        }
-        return null;
+    public void deleteCustomer(Customer customerToDelete){
+        customers.remove(customerToDelete);
     }
 
     public void updateCustomer( int id, int field, String value){
@@ -42,6 +30,13 @@ public class CustomerService {
                 customer.setPhoneNumber(value);
                 break;
         }
+    }
+
+    public Customer findCustomerById(int id){
+        for(Customer c : customers){
+            if(id == c.getCustomerId()) return c;
+        }
+        return null;
     }
 
 }
